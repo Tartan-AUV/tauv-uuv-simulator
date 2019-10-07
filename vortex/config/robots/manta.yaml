@@ -72,8 +72,8 @@ controller:
   circleOfAcceptance: 0.20
   frequency: 40
   position_gain: 0.3 #5.0
-  attitude_gain: 0.4 #2.5
+  attitude_gain: 3.0 #2.5
   velocity_gain: 0.7 #0.4
-  integral_gain: 0.0 #0.3
+  integral_gain: 0.1 #0.3
 
 computer: 'odroid'
