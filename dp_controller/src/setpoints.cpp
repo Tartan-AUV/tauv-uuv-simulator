@@ -30,9 +30,6 @@ bool Setpoints::update(const Eigen::Vector6d &command)
 
 bool Setpoints::get(Eigen::Vector6d *wrench)
 {
-  if (!m_wrench_is_valid)
-    return false;
-
   *wrench = m_wrench;
   //CHANGE BY KRISTOFFER
   //sreturn true;
@@ -42,8 +39,6 @@ bool Setpoints::get(Eigen::Vector6d *wrench)
 bool Setpoints::get(Eigen::Vector3d    *position,
                     Eigen::Quaterniond *orientation)
 {
-  if (!m_pose_is_valid)
-    return false;
 
   *position    = m_position;
   *orientation = m_orientation;
@@ -52,25 +47,16 @@ bool Setpoints::get(Eigen::Vector3d    *position,
 
 bool Setpoints::get(Eigen::Vector3d *position)
 {
-  if (!m_pose_is_valid)
-    return false;
-
   *position    = m_position;
 }
 
 bool Setpoints::get(Eigen::Quaterniond *orientation)
 {
-  if (!m_pose_is_valid)
-    return false;
-
   *orientation = m_orientation;
 }
 
 bool Setpoints::getEuler(Eigen::Vector3d *orientation)
 {
-  if (!m_pose_is_valid)
-    return false;
-
   const double w = m_orientation.w();
   const double x = m_orientation.x();
   const double y = m_orientation.y();
