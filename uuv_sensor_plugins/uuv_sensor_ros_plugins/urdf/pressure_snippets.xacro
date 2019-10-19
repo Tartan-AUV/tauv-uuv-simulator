@@ -36,7 +36,8 @@
       range="30000"
       noise_sigma="3.0"
       noise_amplitude="0.0"
-      estimateDepth="false"
+      estimateDepth="true"
+      depthTopic="depth"
       standardPressure="101.325"
       kPaPerM="9.80638">
       <inertia ixx="0.00001" ixy="0.0" ixz="0.0" iyy="0.00001" iyz="0.0" izz="0.00001" />
@@ -55,7 +56,8 @@
       range="30000"
       noise_sigma="3.0"
       noise_amplitude="0.0"
-      estimateDepth="false"
+      estimateDepth="true"
+      depthTopic="depth"
       standardPressure="101.325"
       kPaPerM="9.80638">
       <inertia ixx="0.00001" ixy="0.0" ixz="0.0" iyy="0.00001" iyz="0.0" izz="0.00001" />
@@ -65,7 +67,7 @@
 
   <xacro:macro name="pressure_plugin_macro"
     params="namespace suffix parent_link topic mass update_rate
-      range noise_sigma noise_amplitude estimateDepth standardPressure kPaPerM
+      range noise_sigma noise_amplitude estimateDepth depthTopic standardPressure kPaPerM
       *inertia *origin">
 
     <link name="${namespace}/pressure${suffix}_link">
@@ -101,6 +103,7 @@
         <noise_sigma>${noise_sigma}</noise_sigma> <!-- measurement stddev [kPa] -->
         <noise_amplitude>${noise_amplitude}</noise_amplitude>
         <estimate_depth_on>${estimateDepth}</estimate_depth_on> <!-- infer depth? -->
+        <depth_topic>${depthTopic}</depth_topic>
         <standard_pressure>${standardPressure}</standard_pressure> <!-- pressure at sea level (depth 0 m) [kPa] -->
         <kPa_per_meter>${kPaPerM}</kPa_per_meter> <!-- increase in pressure [kPa] per [m] in increased depth -->
         <enable_gazebo_messages>false</enable_gazebo_messages>

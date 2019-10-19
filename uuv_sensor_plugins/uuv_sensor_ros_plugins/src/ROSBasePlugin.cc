@@ -54,7 +54,7 @@ bool ROSBasePlugin::InitBasePlugin(sdf::ElementPtr _sdf)
   std::string sensorTopic;
   GetSDFParam<std::string>(_sdf, "sensor_topic", sensorTopic, "");
   if (!sensorTopic.empty())
-    this->sensorOutputTopic = sensorTopic;
+    this->sensorOutputTopic = "sensors/" + sensorTopic;
   GZ_ASSERT(!this->sensorOutputTopic.empty(),
     "Sensor output topic has not been provided");
 

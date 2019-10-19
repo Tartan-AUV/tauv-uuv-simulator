@@ -11,6 +11,7 @@ find_package(catkin REQUIRED
   geometry_msgs
   std_msgs
   roscpp
+  tauv_msgs
   tf
   gazebo_plugins
   uuv_sensor_plugins_ros_msgs
@@ -81,6 +82,7 @@ catkin_package(
     uuv_gazebo_plugins
     sensor_msgs
     uuv_sensor_plugins_ros_msgs
+    tauv_msgs
 )
 
 ###########
@@ -151,7 +153,7 @@ add_library(uuv_gazebo_ros_subsea_pressure_plugin
   src/ROSBasePlugin.cc
   src/ROSBaseModelPlugin.cc)
 target_link_libraries(uuv_gazebo_ros_subsea_pressure_plugin ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES})
-add_dependencies(uuv_gazebo_ros_subsea_pressure_plugin uuv_sensor_gazebo_msgs ${catkin_EXPORTED_TARGETS})
+add_dependencies(uuv_gazebo_ros_subsea_pressure_plugin uuv_sensor_gazebo_msgs tauv_msgs ${catkin_EXPORTED_TARGETS})
 list(APPEND UUV_SENSOR_ROS_PLUGINS_LIST uuv_gazebo_ros_subsea_pressure_plugin)
 
 ###############################################################################
@@ -161,7 +163,7 @@ add_library(uuv_gazebo_ros_dvl_plugin
   src/ROSBasePlugin.cc
   src/ROSBaseModelPlugin.cc)
 target_link_libraries(uuv_gazebo_ros_dvl_plugin ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES})
-add_dependencies(uuv_gazebo_ros_dvl_plugin uuv_sensor_gazebo_msgs ${catkin_EXPORTED_TARGETS})
+add_dependencies(uuv_gazebo_ros_dvl_plugin uuv_sensor_gazebo_msgs tauv_msgs ${catkin_EXPORTED_TARGETS})
 list(APPEND UUV_SENSOR_ROS_PLUGINS_LIST uuv_gazebo_ros_dvl_plugin)
 
 ###############################################################################
@@ -171,7 +173,7 @@ add_library(uuv_gazebo_ros_magnetometer_plugin
   src/ROSBasePlugin.cc
   src/ROSBaseModelPlugin.cc)
 target_link_libraries(uuv_gazebo_ros_magnetometer_plugin ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES})
-add_dependencies(uuv_gazebo_ros_magnetometer_plugin uuv_sensor_gazebo_msgs ${catkin_EXPORTED_TARGETS})
+add_dependencies(uuv_gazebo_ros_magnetometer_plugin uuv_sensor_gazebo_msgs tauv_msgs ${catkin_EXPORTED_TARGETS})
 list(APPEND UUV_SENSOR_ROS_PLUGINS_LIST uuv_gazebo_ros_magnetometer_plugin)
 
 ###############################################################################
@@ -191,7 +193,7 @@ add_library(uuv_gazebo_ros_imu_plugin
   src/ROSBasePlugin.cc
   src/ROSBaseModelPlugin.cc)
 target_link_libraries(uuv_gazebo_ros_imu_plugin ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES})
-add_dependencies(uuv_gazebo_ros_imu_plugin uuv_sensor_gazebo_msgs ${catkin_EXPORTED_TARGETS})
+add_dependencies(uuv_gazebo_ros_imu_plugin uuv_sensor_gazebo_msgs tauv_msgs ${catkin_EXPORTED_TARGETS})
 list(APPEND UUV_SENSOR_ROS_PLUGINS_LIST uuv_gazebo_ros_imu_plugin)
 
 ###############################################################################
@@ -201,7 +203,7 @@ add_library(uuv_gazebo_ros_rpt_plugin
   src/ROSBasePlugin.cc
   src/ROSBaseModelPlugin.cc)
 target_link_libraries(uuv_gazebo_ros_rpt_plugin ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES})
-add_dependencies(uuv_gazebo_ros_rpt_plugin uuv_sensor_gazebo_msgs ${catkin_EXPORTED_TARGETS})
+add_dependencies(uuv_gazebo_ros_rpt_plugin uuv_sensor_gazebo_msgs tauv_msgs ${catkin_EXPORTED_TARGETS})
 list(APPEND UUV_SENSOR_ROS_PLUGINS_LIST uuv_gazebo_ros_rpt_plugin)
 
 ###############################################################################

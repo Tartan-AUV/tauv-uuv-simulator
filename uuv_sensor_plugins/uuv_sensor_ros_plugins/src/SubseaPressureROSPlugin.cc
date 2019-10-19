@@ -14,6 +14,7 @@
 // limitations under the License.
 
 #include <uuv_sensor_ros_plugins/SubseaPressureROSPlugin.hh>
+#include <tauv_msgs/FluidDepth.h>
 
 namespace gazebo
 {
@@ -37,9 +38,22 @@ void SubseaPressureROSPlugin::Load(physics::ModelPtr _model,
     101.325);
   GetSDFParam<double>(_sdf, "kPa_per_meter", this->kPaPerM, 9.80638);
 
+  if (this->estimateDepth)
+  {
+    std::string depthTopicName;
+    GetSDFParam<std::string>(_sdf, "depthTopic", depthTopicName, "depth");
+    this->sensorDepthTopic = "sensors/" + depthTopicName;
+  }
+
   this->rosSensorOutputPub =
     this->rosNode->advertise<sensor_msgs::FluidPressure>(
       this->sensorOutputTopic, 1);
+  if (this->estimateDepth)
+  {
+    this->rosDepthOutputPub =
+        this->rosNode->advertise<tauv_msgs::FluidDepth>(
+            this->sensorDepthTopic, 1);
+  }
 
   if (this->gazeboMsgEnabled)
   {
@@ -105,8 +119,20 @@ bool SubseaPressureROSPlugin::OnUpdate(const common::UpdateInfo& _info)
 
   rosMsg.fluid_pressure = pressure;
   rosMsg.variance = this->noiseSigma * this->noiseSigma;
-
   this->rosSensorOutputPub.publish(rosMsg);
+
+  if (this->estimateDepth)
+  {
+    tauv_msgs::FluidDepth depthMsg;
+    depthMsg.header.stamp.sec = _info.simTime.sec;
+    depthMsg.header.stamp.nsec = _info.simTime.nsec;
+    depthMsg.header.frame_id = this->link->GetName();
+
+    depthMsg.depth = inferredDepth;
+    depthMsg.variance = this->noiseSigma * this->noiseSigma / (this->kPaPerM * this->kPaPerM);
+    this->rosDepthOutputPub.publish(depthMsg);
+  }
+
 
   // Read the current simulation time
 #if GAZEBO_MAJOR_VERSION >= 8

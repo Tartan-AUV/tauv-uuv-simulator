@@ -24,6 +24,7 @@
   <depend>roscpp</depend>
   <depend>uuv_gazebo_plugins</depend>
   <depend>uuv_sensor_plugins_ros_msgs</depend>
+  <depend>tauv_msgs</depend>
   <depend>tf</depend>
   <depend>message_filters</depend>
   <depend>tf2_ros</depend>

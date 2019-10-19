@@ -21,6 +21,7 @@
 #include <uuv_sensor_ros_plugins/ROSBaseModelPlugin.hh>
 #include "SensorPressure.pb.h"
 #include <sensor_msgs/FluidPressure.h>
+#include <string>
 
 namespace gazebo
 {
@@ -50,6 +51,12 @@ namespace gazebo
 
     /// \brief Factor of kPa per meter
     protected: double kPaPerM;
+
+    /// \brief Topic to publish depth data to
+    protected: std::string sensorDepthTopic;
+
+      /// \brief Gazebo's publisher for transporting measurement messages.
+    protected: ros::Publisher rosDepthOutputPub;
   };
 }
 
